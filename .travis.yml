@@ -1,0 +1,24 @@
+language: ruby
+rvm:
+  - 2.2
+cache: bundler
+
+branches:
+  only:
+  - master
+  - stable
+
+install:
+  - bundle install
+
+before_script:
+  - chmod +x checkout-and-build.sh
+  - chmod +x deploy.sh
+
+script:
+  - "./checkout-and-build.sh"
+  - "./deploy.sh"
+
+env:
+  global:
+  - secure: P5JTZgyyKA3a71QFWCqjLO5VgXOTe7du6TzlUMM4x3NC/91dXDJqnJHjQiFrfrRcCjcs+4UbvdyFU+dfnAcsRw1aeBVjHQRMV2c6RZzr86nwPVsikJ69clf0f3+1LxKlgepz2ik8Y0ntH/I1jD6YssQlcudxRL9tFa+FxNGXwo5l83L61+CbyJrwSaCws6VY2a7BUBiIQ+uDv9ggH0yXSJtdpc2T0kHIX5OZqE1Iy41S9Sl+zH773uwM1a1XUXnL0QHnyARRxq2CiCxqSFejrpaipxxuzFpP89xvtbcEBptCjgOwVV2CUKPDcoEixBrEiHedSULLv0VIne8EI4lM+cbr1SmaF7cTwDbrt6ErhiwPhj7CnHQyEtXRLmdneQ+iGYLCCeRZUTpgCzKfoI7/Eb2uSet6rS+0+nMsQbdJUnRPgZhbKqbhPyCeZK0tenen/7KAbzLCFD+eIWT9zODfJyaGKNnjzmGJhlL3Fbxet5+1OPKWisBgd1P3n+qslbKVTq7fK6ervBOJGUUGeIRshgmuSSJ/X4ylpN40dipFiny5FLjfNkJv8x2pWOffpgZlBHqiqa8ggj9K88gGH6n89BtfleT+LwfkiimA3XyNdiGtFe/TnBYHIhk4shKng7967tgwsqwLGfPgvn13yxHM3Gz5lzmfpaRaJkjXcnzow9A=
