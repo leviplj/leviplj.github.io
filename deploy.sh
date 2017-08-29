@@ -31,7 +31,7 @@ function deploy {
 
 	echo "Commiting changes"
 	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-	git push $DEPLOY_REPO $TRAVIS_BRANCH:$DEPLOY_BRANCH
+	git push $DEPLOY_REPO $DEPLOY_BRANCH:$DEPLOY_BRANCH
 }
 
 deploy
