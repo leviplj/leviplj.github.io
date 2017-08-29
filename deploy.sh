@@ -3,7 +3,7 @@
 set -e
 
 DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/leviplj/leviplj.github.io.git"
-DEPLOY_BRANCH=gh-pages
+DEPLOY_BRANCH=master
 
 function deploy {
 	echo "deploying changes"
