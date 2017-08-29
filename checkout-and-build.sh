@@ -3,6 +3,7 @@
 set -e
 
 DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/leviplj/leviplj.github.io.git"
+DEPLOY_BRANCH=master
 
 function main {
 	clean
@@ -17,7 +18,7 @@ function clean {
 
 function checkout {
 	echo "getting latest site version"
-	git clone --depth 1 --branch gh-pages --single-branch $DEPLOY_REPO _site
+	git clone --depth 1 --branch $DEPLOY_BRANCH --single-branch $DEPLOY_REPO _site
 }
 
 function build_site {
