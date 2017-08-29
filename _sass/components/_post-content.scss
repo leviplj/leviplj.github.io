@@ -1,0 +1,31 @@
+@import "components/variables";
+
+// Post Content Tags
+.post-content {
+    padding-top: 20px;
+    p {
+        font-size: 2rem;
+        font-weight: 300;
+        margin-bottom: 30px;
+        text-align: justify;
+    }
+
+    blockquote {
+        padding-top: 1em;
+        padding-left: 2em;
+        font-style: italic;
+        color: $gray-light;
+        border-color: $theme-primary;
+        position: relative;
+    }
+
+    blockquote::before {
+        content: '"';
+        position: absolute;
+        top: -8px;
+        left: .2em;
+        color: $gray-light;
+        font-size: 3em;
+        font-family: 'Trebuchet MS', sans-serif
+    }
+}

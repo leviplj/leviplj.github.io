@@ -1,0 +1,52 @@
+---
+---
+@import "components/navbar";
+@import "components/header";
+@import "components/post-content";
+@import "components/variables";
+
+.post-title {
+    a {
+        text-decoration: none;
+        color: $gray;
+        background-image: linear-gradient(to left, $gray, $gray);
+        background-size: 0% 3px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        padding-bottom: 3px;
+        transition: background-size .5s;
+    }
+    a:hover {
+        color: $gray-darker;
+        background-size: 100% 3px;
+    }
+}
+
+.post-meta {
+    display: block;
+    margin: 1.75rem 0 0 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    color: lighten($gray-base, 55%);
+
+    a {
+        color: lighten($gray-base, 55%);
+        text-decoration: none;
+    }
+
+    a:focus,
+    a:hover {
+        color: $gray;        
+    }
+}
+
+.post-date {
+    display: inline-block;
+    margin-left: 8px;
+    padding-left: 12px;
+    border-left: $gray-lighter 1px solid;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    white-space: nowrap;
+}

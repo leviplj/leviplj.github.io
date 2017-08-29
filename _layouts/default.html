@@ -21,6 +21,13 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">    
 
     <style>
+        header {
+            {% if page.localimage %}
+              background-image: url('{{ site.baseurl }}{{ page.localimage }}');
+            {% else %}
+              background-image: url('{{ page.image }}');
+            {% endif %}
+        }
     </style>
 </head>
 <body>
