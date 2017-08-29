@@ -4,8 +4,7 @@ rvm:
 cache: bundler
 branches:
   only:
-  - master
-  - stable
+  - gh-pages
 install:
 - bundle install
 before_script:

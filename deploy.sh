@@ -3,10 +3,7 @@
 set -e
 
 DEPLOY_REPO="https://${DEPLOY_BLOG_TOKEN}@github.com/leviplj/leviplj.github.io.git"
-
-function main {
-	deploy
-}
+DEPLOY_BRANCH=gh-pages
 
 function deploy {
 	echo "deploying changes"
@@ -16,8 +13,8 @@ function deploy {
 	    exit 0
 	fi
 
-	if [ "$TRAVIS_BRANCH" != "master" ]; then
-	    echo "except we should only publish the master branch. stopping here"
+	if [ "$TRAVIS_BRANCH" != "gh-pages" ]; then
+	    echo "except we should only publish the gh-pages branch. stopping here"
 	    exit 0
 	fi
 
@@ -34,7 +31,7 @@ function deploy {
 
 	echo "Commiting changes"
 	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-	git push $DEPLOY_REPO gh-pages:gh-pages
+	git push $DEPLOY_REPO $TRAVIS_BRANCH:$DEPLOY_BRANCH
 }
 
-main
+deploy

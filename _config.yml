@@ -17,4 +17,4 @@ markdown: kramdown
 permalink: /blog/:title
 sass:
   style: compressed
-exclude: ['README.md', "*.sh"]
+exclude: ['README.md', "*.sh", "Gemfile"]
