@@ -13,12 +13,12 @@ localimage: /assets/img/night.jpg
         <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
       </h2>
       <section class="post-excerpt">
-        <p>{{ post.excerpt }}... <a href="{{ post.url | relative_url }}">>></a></p>
+        <p>{{ post.excerpt }}...</p>
       </section>
-      <footer class="post-meta">
+      <div class="post-meta">
         <a href="#" class="author-thumb"> {{ post.author }} </a>
         <time class="post-date" datetime="{{ post.date }}">{{ post.date | date_to_string}}</time>
-      </footer>
+      </div>
     </article>
   {% endfor %}
 

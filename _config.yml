@@ -9,9 +9,10 @@ url: "levileal.me"
 
 # Social
 github: https://github.com/leviplj
+linkedin: https://linkedin.com/in/leviplj
+twitter: https://twitter.com/jLeviLeal
 
-
-#Build settings
+# Build settings
 destination: _site
 markdown: kramdown
 permalink: /blog/:title

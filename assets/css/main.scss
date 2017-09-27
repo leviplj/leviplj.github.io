@@ -3,6 +3,7 @@
 @import "components/navbar";
 @import "components/header";
 @import "components/post-content";
+@import "components/footer";
 @import "components/variables";
 
 .post-title {
@@ -49,4 +50,19 @@
     text-transform: uppercase;
     font-size: 1.3rem;
     white-space: nowrap;
+}
+
+.btn-circle {
+    font-size: 26px;
+    width: 55px;
+    height: 55px;
+    margin-top: 15px;
+    line-height: 38px;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 100%!important;
+    background: 0 0;
 }
