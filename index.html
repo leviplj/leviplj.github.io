@@ -4,22 +4,17 @@ subtitle: Some Sub here plz
 layout: default
 localimage: /assets/img/night.jpg
 ---
-
-<div class="row">
-
-  {% for post in site.posts %}
-    <article>
-      <h2 class="post-title">
-        <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-      </h2>
-      <section class="post-excerpt">
-        <p>{{ post.excerpt }}...</p>
-      </section>
-      <div class="post-meta">
-        <a href="#" class="author-thumb"> {{ post.author }} </a>
-        <time class="post-date" datetime="{{ post.date }}">{{ post.date | date_to_string}}</time>
-      </div>
-    </article>
-  {% endfor %}
-
-</div>
+{% for post in site.posts %}
+  <article>
+    <h2 class="post-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    </h2>
+    <section class="post-excerpt">
+      <p>{{ post.excerpt }}...</p>
+    </section>
+    <div class="post-meta">
+      <a href="#" class="author-thumb"> {{ post.author }} </a>
+      <time class="post-date" datetime="{{ post.date }}">{{ post.date | date_to_string}}</time>
+    </div>
+  </article>
+{% endfor %}
