@@ -24,14 +24,20 @@ function deploy {
 	echo "Adding changes"
 	cd _site
 	git config --global user.name "Travis CI"
-    git config --global user.email leviplj@gmail.com
+	git config --global user.email leviplj@gmail.com
 
 	git add -A .
 	git status
 
-	echo "Commiting changes"
-	git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
-	git push $DEPLOY_REPO $DEPLOY_BRANCH:$DEPLOY_BRANCH
+	if git diff-index --quiet HEAD --; then
+		echo "No Changes to Commit"
+		exit 0
+	else
+
+		echo "Commiting changes"
+		git commit -m "Lastest site built on successful travis build $TRAVIS_BUILD_NUMBER auto-pushed to github"
+		git push $DEPLOY_REPO $DEPLOY_BRANCH:$DEPLOY_BRANCH
+	fi
 }
 
 deploy

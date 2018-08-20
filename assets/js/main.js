@@ -29,4 +29,15 @@
         }
     })
 
+    $(window).scroll(()=>{
+        var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
+        var scrollTrigger = 150;
+
+        if ( wintop > scrollTrigger) {
+            $('.back-top').fadeIn(750);
+        } else {
+            $('.back-top').fadeOut(750);
+        }
+    })
+
 })(jQuery); // End of use strict

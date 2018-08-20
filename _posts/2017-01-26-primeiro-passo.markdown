@@ -3,7 +3,7 @@ author: Levi Leal
 layout: post
 title:  "Primeiro Passo"
 date:   2017-01-26 00:29:09 -0300
-categories: naosei
+categories: First Step
 image: https://codez1.files.wordpress.com/2017/01/babys-first-steps-454.jpg
 excerpt: Há um bom tempo venho pensando em criar um site, blog, vlog
 comments: True

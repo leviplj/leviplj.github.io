@@ -23,10 +23,10 @@
 
     <style>
         header {
-            {% if page.localimage %}
-              background-image: url('{{ site.baseurl }}{{ page.localimage }}');
-            {% else %}
+            {% if page.image contains '://' %}
               background-image: url('{{ page.image }}');
+            {% else %}
+              background-image: url('{{ site.baseurl }}{{ page.image }}');
             {% endif %}
         }
     </style>

@@ -23,10 +23,10 @@
 
     <style>
         header {
-            {% if page.localimage %}
-              background-image: url('{{ site.baseurl }}{{ page.localimage }}');
-            {% else %}
+            {% if page.image contains '://' %}
               background-image: url('{{ page.image }}');
+            {% else %}
+              background-image: url('{{ site.baseurl }}{{ page.image }}');
             {% endif %}
         }
     </style>
@@ -86,6 +86,10 @@
     </section>
 {% endif %}
 
+
+<a href="#page-top" class="page-scroll btn btn-circle back-top">
+    <i class="fa fa-angle-double-up animated"></i>
+</a>
 
     <!-- Footer -->
     {% include footer.html %}
