@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="No Description Yet">
     <meta name="author" content="Levi Leal">
-    <meta name="description" content="&lttag/&gt">
 
-    <title>Levi Leal</title>
+    <title>Messing Around with Python</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -17,12 +17,12 @@
     
     <!-- Fonts -->
     <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">    
 
     <style>
         header {
             
-              background-image: url('/assets/img/night.jpg');
+              background-image: url('https://codez1.files.wordpress.com/2017/01/babys-first-steps-454.jpg');
             
         }
     </style>
@@ -63,54 +63,82 @@
 </nav>
 
     <header>
-    <div class="container">
-        <div class="intro-text">
-            <div class="shadow">
-                <div class="intro-lead-in">&lttag/&gt</div>
-                <div class="intro-heading">Levi Leal</div>
+        <div class="container">
+            <div class="intro-text">
+                <div class="shadow">
+                    <div class="intro-lead-in">Introduction</div>
+                    <div class="intro-heading">Messing Around with Python</div>
+                </div>
+                <a href="#content" class="page-scroll btn btn-circle">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
             </div>
-            <a href="#content" class="page-scroll btn btn-circle">
-                <i class="fa fa-angle-double-down animated"></i>
-            </a>
-        </div>            
-    </div>
-</header>
+        </div>
+    </header>
 
-<section id="content">
+
+<!-- Services Section -->
+<section id="content" class="post-content">
     <div class="container">
         <div class="row">
-            
-  <article>
-    <h2 class="post-title">
-      <a href="/blog/messing-around-python-intro">Messing Around with Python</a>
-    </h2>
-    <section class="post-excerpt">
-      <p><p>Today I’ll start a series of posts where I play around with python and show some interesting tricks you can do on it.</p>
+            <p>Today I’ll start a series of posts where I play around with python and show some interesting tricks you can do on it.</p>
 
-...</p>
-    </section>
-    <div class="post-meta">
-      <a href="#" class="author-thumb"> Levi Leal </a>
-      <time class="post-date" datetime="2018-08-17 23:00:00 +0000">17 Aug 2018</time>
-    </div>
-  </article>
+<p>This series will address some metaprogramming concepts in python and how to use them.</p>
 
-  <article>
-    <h2 class="post-title">
-      <a href="/blog/primeiro-passo">Primeiro Passo</a>
-    </h2>
-    <section class="post-excerpt">
-      <p>Há um bom tempo venho pensando em criar um site, blog, vlog...</p>
-    </section>
-    <div class="post-meta">
-      <a href="#" class="author-thumb"> Levi Leal </a>
-      <time class="post-date" datetime="2017-01-26 03:29:09 +0000">26 Jan 2017</time>
-    </div>
-  </article>
+<p>We are going to use the version 3.6.0 of Python, but you can use any 3.3+. Don’t try earlier versions because your computer can explode then.</p>
+
+<p>So first of all, what is metaprogramming?</p>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Metaprogramming">Wikipedia</a></p>
+<blockquote>
+  <p>Metaprogramming is a programming technique in which computer programs have the ability to treat programs as their data. It means that a program can be designed to read, generate, analyse or transform other programs, and even modify itself while running.</p>
+</blockquote>
+
+<p>In a nutshell, metaprogramming is code that manipulates code. Some common examples of doing it in Python is using: Decorators, Metaclasses or Descriptors.</p>
+
+<p>So why would you care about this? Well, metaprogramming is extensively used in frameworks and libraries, you will get to know better how Python works, it solves a practical problem and, the most important of all, it’s fun.</p>
+
+<p>Sometimes when programming we repeat lots of code and that can turn into a problem later when we have to modify that because the same code would be on many places. There is a principle in software development that helps us not to fall in this issue. It’s called DRY, that stands for Don’t Repeat Yourself, that stands for Don’t Repeat Yourself.</p>
+
+<p>Here are some reasons why we should try to keep this principle: High repetitive code sucks, it is tedious to write, it is also hard to read and it is difficult to modify.</p>
+
+<p>This series go for anyone who: want to build a framework/library or is just curious about how things work.</p>
 
         </div>
     </div>
 </section>
+
+
+    <section id="comments" class="container">
+        <div class="row">
+            <div id="disqus_thread"></div>
+            <script>
+
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://levileal.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+    </section>
+
+
+
+<a href="#page-top" class="page-scroll btn btn-circle back-top">
+    <i class="fa fa-angle-double-up animated"></i>
+</a>
 
     <!-- Footer -->
     <footer>
