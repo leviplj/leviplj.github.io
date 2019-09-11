@@ -21,13 +21,10 @@ jobs:
       before_script:
         - npm install -g sass-lint htmllint-cli markdownlint-cli
       script:
-        - JEKYLL_ENV=bundle exec jekyll build
-        - htmllint _includes/stripped_markdown.html
-        - markdownlint _posts _drafts _pages README.md
-        - sass-lint --verbose --no-exit
+        - bundle exec jekyll build
     - stage: Github Release
       script:
-        - JEKYLL_ENV=bundle exec jekyll build
+        - bundle exec jekyll build
       deploy:
         provider: pages
         local-dir: ./_site
