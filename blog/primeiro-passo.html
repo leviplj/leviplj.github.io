@@ -139,9 +139,9 @@
 
 
 
-<a href="#page-top" class="page-scroll btn btn-circle back-top">
-    <i class="fa fa-angle-double-up animated"></i>
-</a>
+    <a href="#page-top" class="page-scroll btn btn-circle back-top">
+        <i class="fa fa-angle-double-up animated"></i>
+    </a>
 
     <!-- Footer -->
     <footer>
@@ -188,5 +188,40 @@
 
     <script src="/assets/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
+
+
+    <script>
+        tldr_content = document.querySelector('.tldr-content')
+        toggle = document.querySelector('#tldr-toggle')
+        toggle.addEventListener('click', () => {
+            if (toggle.checked) {
+                tldr_content.classList.remove('collapse')
+            } else {
+                tldr_content.classList.add('collapse')
+    
+            }
+        })   
+    </script>
+    
+    <style>
+        div[class^="language-"] pre.highlight {
+            position: relative;
+        }
+    
+        div[class^="language-"] pre.highlight::after {
+            position: absolute;
+            top: 2px;
+            right: 6px;
+        }
+    
+        .language-bash pre.highlight::after {
+            content: 'bash';
+        }
+    
+        .language-python pre.highlight::after {
+            content: 'python';
+        }
+    </style>
+    <link href="/assets/css/rouge.css" rel="stylesheet" />
 </body>
 </html>

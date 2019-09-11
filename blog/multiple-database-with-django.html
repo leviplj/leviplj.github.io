@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="No Description Yet">
+    <meta name="author" content="Levi Leal">
+
+    <title>Multiple Databases with Django</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link type="text/css" rel="stylesheet" href="/assets/css/main.css"  media="screen,projection"/>
+    
+    <!-- Fonts -->
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">    
+
+    <style>
+        header {
+            
+              background-image: url('/assets/img/code-laptop.jpg');
+            
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+        </button>
+        <img src="/assets/img/logo.svg" class="navbar-brand page-scroll img-responsive" alt="Code Z1 Logo" style="padding: 0 15px;">
+        <a class="navbar-brand page-scroll" href="/">Levi Leal</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="hidden">
+            <a href="#page-top"></a>
+            </li>
+            <li>
+            <a class="page-scroll" href="/curriculum" target="_blank">Curriculum</a>
+            </li>
+            <li>
+            <a class="page-scroll" href="/blog">Blog</a>
+            </li>
+            <li>
+            <a class="page-scroll" href="/contact">Contact</a>
+            </li>
+        </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+<!-- /.container-fluid -->
+</nav>
+
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="shadow">
+                    <div class="intro-lead-in">Django DB Router</div>
+                    <div class="intro-heading">Multiple Databases with Django</div>
+                </div>
+                <a href="#content" class="page-scroll btn btn-circle">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+<!-- Services Section -->
+<section id="content" class="post-content">
+    <div class="container">
+        <div class="row">
+            <p><input type="checkbox" id="tldr-toggle" />TL;DR</p>
+
+<section class="tldr-content collapse">
+  <p>In this section we’ll create a django app, so if you already have one app, skip this section.</p>
+
+  <p>Create folder (workspace)</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>django-multidb
+</code></pre></div>  </div>
+
+  <p>Enter the folder</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>django-multidb
+</code></pre></div>  </div>
+
+  <h3 id="initialize-the-environment">Initialize the environment</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> venv .venv
+</code></pre></div>  </div>
+
+  <h3 id="activate-the-environment">Activate the environment</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
+</code></pre></div>  </div>
+
+  <h3 id="install-django-framework">Install django framework</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>django
+</code></pre></div>  </div>
+
+  <h3 id="start-a-django-project">Start a django project</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>django-admin startproject django_multidb <span class="nb">.</span>
+</code></pre></div>  </div>
+
+  <p>Folders should look like</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span>
+├── django_multidb
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── manage.py
+</code></pre></div>  </div>
+
+  <h3 id="test-the-project">Test the project</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py runserver
+</code></pre></div>  </div>
+
+  <p>Enter localhost:8000
+Should show the default django start page</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py migrate
+python manage.py createsuperuser
+
+python manage.py runserver
+</code></pre></div>  </div>
+
+  <p>Go to localhost:8000/admin and test the login</p>
+
+  <h4 id="enter-the-folder-djangomultidb">Enter the folder django_multidb</h4>
+  <p>create a app called core</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>django-admin startapp core
+</code></pre></div>  </div>
+
+  <h1 id="create-your-models-here">Create your models here.</h1>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#core/models.py
+</span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_name</span>
+</code></pre></div>  </div>
+
+  <h1 id="register-your-models-here">Register your models here.</h1>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#core/admin.py
+</span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+<span class="kn">from</span> <span class="nn">django_multidb.core.models</span> <span class="kn">import</span> <span class="n">Person</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+</code></pre></div>  </div>
+
+  <h4 id="register-the-application-core">Register the application core</h4>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#settings.py
+</span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'django.contrib.admin'</span><span class="p">,</span>
+    <span class="s">'django.contrib.auth'</span><span class="p">,</span>
+    <span class="s">'django.contrib.contenttypes'</span><span class="p">,</span>
+    <span class="s">'django.contrib.sessions'</span><span class="p">,</span>
+    <span class="s">'django.contrib.messages'</span><span class="p">,</span>
+    <span class="s">'django.contrib.staticfiles'</span><span class="p">,</span>
+    <span class="s">'django_multidb.core'</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>  </div>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
+</code></pre></div>  </div>
+
+  <p>Go to localhost:8000/admin
+you should see</p>
+
+  <p>AUTHENTICATION AND AUTHORIZATION
+Groups	
+Users</p>
+
+  <p>CORE
+Persons</p>
+
+  <p>Click Persons
+Click Add Person</p>
+
+  <p>Add as many as you like.</p>
+
+  <p>Now you have a basic application working we can start the real thing…</p>
+</section>
+
+<h1 id="setting-up-for-multidb">Setting up for multidb</h1>
+<p>We’re going to use python-decouple to get env variables</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>python-decouple
+</code></pre></div></div>
+
+<p>Create a .env file that will contain all environment variables.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DEBUG=True
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#settings.py
+</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">decouple</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="o">...</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="n">config</span><span class="p">(</span><span class="s">'DEBUG'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We’re using dj-database-url to set the database with a url</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>pip <span class="nb">install </span>dj-database-url
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#settings.py
+</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">decouple</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">dj_database_url</span> <span class="kn">import</span> <span class="n">parse</span> <span class="k">as</span> <span class="n">dburl</span>
+<span class="o">...</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'default'</span><span class="p">:</span> <span class="n">dburl</span><span class="p">(</span><span class="n">f</span><span class="s">'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}'</span><span class="p">),</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py runserver
+</code></pre></div></div>
+
+<p>Go to localhost:8000</p>
+
+<p>All your data should be the same as before</p>
+
+<h1 id="create-multidb-module">Create multidb module</h1>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#django_multidb/multidb/__init__.py
+</span><span class="s">"""
+Select database based on URL variable
+
+Inspired by this Django snipped:
+
+https://djangosnippets.org/snippets/2037/
+
+It's assumed that any view in the system with a cfg keyword argument passed to
+it from the urlconf may be routed to a separate database. for example:
+
+  url( r'^(?P&lt;db&gt;</span><span class="err">\</span><span class="s">w+)/account/$', 'views.account' )
+
+The middleware and router will select a database whose alias is &lt;db&gt;,
+"default" if no db argument is given and raise a 404 exception if not listed in
+settings.DATABASES, all completely transparent to the view itself.
+"""</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span>
+<span class="kn">from</span> <span class="nn">django.middleware.common</span> <span class="kn">import</span> <span class="n">CommonMiddleware</span>
+
+<span class="n">request_cfg</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">local</span><span class="p">()</span>
+
+
+<span class="k">class</span> <span class="nc">MultiDbRouterMiddleware</span><span class="p">(</span><span class="n">CommonMiddleware</span><span class="p">):</span>
+    <span class="s">"""
+    The Multidb router middelware.
+
+    he middleware process_view (or process_request) function sets some context
+    from the URL into thread local storage, and process_response deletes it. In
+    between, any database operation will call the router, which checks for this
+    context and returns an appropriate database alias.
+
+    Add this to your middleware, for example:
+
+    MIDDLEWARE += ['django_multidb.multidb.MultiDbRouterMiddleware']
+    """</span>
+    <span class="k">def</span> <span class="nf">process_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">view_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+
+        <span class="n">host</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">META</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'HTTP_HOST'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">DB_URL_MAP</span><span class="p">:</span>
+            <span class="n">request_cfg</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">DB_URL_MAP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">request_cfg</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="s">'default'</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="n">SELECTED_DATABASE</span> <span class="o">=</span> <span class="n">request_cfg</span><span class="o">.</span><span class="n">db</span>
+
+
+<span class="k">class</span> <span class="nc">MultiDbRouter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="s">"""
+    The multiple database router.
+
+    Add this to your Django database router configuration, for example:
+
+    DATABASE_ROUTERS += ['django_multidb.multidb.MultiDbRouter']
+    """</span>
+    <span class="k">def</span> <span class="nf">_multi_db</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'_multi_db'</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request_cfg</span><span class="p">,</span> <span class="s">'db'</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">request_cfg</span><span class="o">.</span><span class="n">db</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">DATABASES</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">request_cfg</span><span class="o">.</span><span class="n">db</span>
+
+    <span class="k">def</span> <span class="nf">db_for_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_db</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="n">instance</span> <span class="o">=</span> <span class="n">hints</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'instance'</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">instance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">instance</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">db</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">instance</span><span class="o">.</span><span class="n">_state</span><span class="o">.</span><span class="n">db</span>
+        
+        <span class="k">return</span> <span class="s">'default'</span>
+
+    <span class="n">db_for_write</span> <span class="o">=</span> <span class="n">db_for_read</span>
+
+
+<span class="k">def</span> <span class="nf">multidb_context_processor</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="s">"""
+    This context processor will add a db_name to the request.
+
+    Add this to your Django context processors, for example:
+
+    TEMPLATES['OPTIONS']['context_processors'] +=
+        ['django_multidb.multidb.multidb_context_processor']
+    """</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'multidb_context_processor'</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">SELECTED_DATABASE</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'SELECTED_DATABASE'</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s">'db_name'</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">SELECTED_DATABASE</span><span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#settings.py
+</span><span class="o">...</span>
+
+<span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'django.middleware.security.SecurityMiddleware'</span><span class="p">,</span>
+    <span class="s">'django.contrib.sessions.middleware.SessionMiddleware'</span><span class="p">,</span>
+    <span class="s">'django.middleware.common.CommonMiddleware'</span><span class="p">,</span>
+    <span class="s">'django.middleware.csrf.CsrfViewMiddleware'</span><span class="p">,</span>
+    <span class="s">'django.contrib.auth.middleware.AuthenticationMiddleware'</span><span class="p">,</span>
+    <span class="s">'django.contrib.messages.middleware.MessageMiddleware'</span><span class="p">,</span>
+    <span class="s">'django.middleware.clickjacking.XFrameOptionsMiddleware'</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">MIDDLEWARE</span> <span class="o">+=</span> <span class="p">[</span><span class="s">'django_multidb.multidb.MultiDbRouterMiddleware'</span><span class="p">]</span>
+<span class="o">...</span>
+
+<span class="n">TEMPLATES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s">'BACKEND'</span><span class="p">:</span> <span class="s">'django.template.backends.django.DjangoTemplates'</span><span class="p">,</span>
+        <span class="s">'DIRS'</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s">'APP_DIRS'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s">'OPTIONS'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'context_processors'</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s">'django.template.context_processors.debug'</span><span class="p">,</span>
+                <span class="s">'django.template.context_processors.request'</span><span class="p">,</span>
+                <span class="s">'django.contrib.auth.context_processors.auth'</span><span class="p">,</span>
+                <span class="s">'django.contrib.messages.context_processors.messages'</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">TEMPLATES</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'OPTIONS'</span><span class="p">][</span><span class="s">'context_processors'</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="s">'django_multidb.multidb.multidb_context_processor'</span><span class="p">]</span>
+<span class="o">...</span>
+
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'default'</span><span class="p">:</span> <span class="n">dburl</span><span class="p">(</span><span class="n">f</span><span class="s">'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}'</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">DATABASE_ROUTERS</span> <span class="o">=</span> <span class="p">[</span><span class="s">'django_multidb.multidb.MultiDbRouter'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="add-a-new-database">Add a new database</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#settings.py
+</span><span class="o">...</span>
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'default'</span><span class="p">:</span> <span class="n">dburl</span><span class="p">(</span><span class="n">f</span><span class="s">'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}'</span><span class="p">),</span>
+    <span class="s">'my_ip'</span><span class="p">:</span> <span class="n">dburl</span><span class="p">(</span><span class="n">f</span><span class="s">'sqlite:///{os.path.join(BASE_DIR, "db2.sqlite3")}'</span><span class="p">),</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="add-url_db-mapping">Add url_db mapping</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#settings.py
+</span><span class="o">...</span>
+<span class="n">DATABASE_ROUTERS</span> <span class="o">=</span> <span class="p">[</span><span class="s">'django_multidb.multidb.MultiDbRouter'</span><span class="p">]</span>
+
+<span class="n">DB_URL_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'localhost:8000'</span><span class="p">:</span> <span class="s">'default'</span><span class="p">,</span>
+    <span class="s">'127.0.0.1:8000'</span><span class="p">:</span> <span class="s">'my_ip'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="migrate-the-database-and-create-a-user">Migrate the database and create a user</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py migrate <span class="nt">--database</span> my_ip
+python manage.py createsuperuser <span class="nt">--database</span> my_ip
+</code></pre></div></div>
+
+<h2 id="test">Test</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python manage.py runserver
+</code></pre></div></div>
+
+<p>Go to localhost:8000 and all your previous data should be there.</p>
+
+<p>Go to 127.0.0.1:8000 and you should get a new empty database.</p>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+    <a href="#page-top" class="page-scroll btn btn-circle back-top">
+        <i class="fa fa-angle-double-up animated"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; levileal.me 2017</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/jLeviLeal" target="_blank">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://linkedin.com/in/leviplj" target="_blank">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/leviplj" target="_blank">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks">
+                    <li class="list-inline-item">
+                        <a href="#page-top" class="page-scroll">#</a>
+                    </li>
+                    <li class="list-inline-item">                        
+                        <a href="#page-top" class="page-scroll">#</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="/assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" integrity="sha384-mE6eXfrb8jxl0rzJDBRanYqgBxtJ6Unn4/1F7q4xRRyIw7Vdg9jP4ycT7x1iVsgb" crossorigin="anonymous"></script>
+
+
+    <script>
+        tldr_content = document.querySelector('.tldr-content')
+        toggle = document.querySelector('#tldr-toggle')
+        toggle.addEventListener('click', () => {
+            if (toggle.checked) {
+                tldr_content.classList.remove('collapse')
+            } else {
+                tldr_content.classList.add('collapse')
+    
+            }
+        })   
+    </script>
+    
+    <style>
+        div[class^="language-"] pre.highlight {
+            position: relative;
+        }
+    
+        div[class^="language-"] pre.highlight::after {
+            position: absolute;
+            top: 2px;
+            right: 6px;
+        }
+    
+        .language-bash pre.highlight::after {
+            content: 'bash';
+        }
+    
+        .language-python pre.highlight::after {
+            content: 'python';
+        }
+    </style>
+    <link href="/assets/css/rouge.css" rel="stylesheet" />
+</body>
+</html>
