@@ -25,7 +25,6 @@ jobs:
         - htmllint _includes/stripped_markdown.html
         - markdownlint _posts _drafts _pages README.md
         - sass-lint --verbose --no-exit
-        - bundle exec htmlproofer _site --allow-hash-href --assume-extension --url-ignore "/localhost/" --http-status-ignore "999"
     - stage: Github Release
       script:
         - JEKYLL_ENV=production bundle exec jekyll build
