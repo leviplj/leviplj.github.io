@@ -22,6 +22,7 @@ jobs:
         - npm install -g sass-lint htmllint-cli markdownlint-cli
       script:
         - JEKYLL_ENV=production bundle exec jekyll build
+        - bundle exec htmlproofer ./_site
         - htmllint _includes/stripped_markdown.html
         - markdownlint _posts _drafts _pages README.md
         - sass-lint --verbose --no-exit
