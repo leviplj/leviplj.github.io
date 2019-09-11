@@ -5,7 +5,7 @@ title:  "Messing Around with Python"
 subtitle: "Introduction"
 date:   2018-08-18 00:00:00 +0100
 categories: Python, Metaprogramming
-image: https://codez1.files.wordpress.com/2017/01/babys-first-steps-454.jpg
+image: /assets/img/baby-computer.jpg
 #excerpt: Há um bom tempo venho pensando em criar um site, blog, vlog
 comments: True
 ---
